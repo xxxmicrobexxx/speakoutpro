@@ -450,9 +450,7 @@ class dk_speakout_Signature
 	public function populate_from_post()
 	{
 		$this->petitions_id = sanitize_text_field( $_POST['id'] );
-		if($this->honorific > ""){
-    	    $this->honorific    = sanitize_text_field( $_POST['honorific'] );
-    	}
+		$this->honorific    = sanitize_text_field( $_POST['honorific'] );
 		$this->first_name   = sanitize_text_field( $_POST['first_name'] );
 		$this->last_name    = sanitize_text_field( $_POST['last_name'] );
 		$this->email        = sanitize_email( $_POST['email'] );

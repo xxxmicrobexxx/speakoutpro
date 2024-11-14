@@ -67,7 +67,7 @@
              <?php //markdown editor 
                 if(  $options['speakout_editor'] != "html" ){ ?>
                     
-                    <textarea name="petition_message" id="petition_message" rows="10" cols="80"><?php echo $petition->petition_message; ?></textarea>
+                    <textarea name="petition_message" id="petition_message" id="petition_message" rows="10" cols="80"><?php echo $petition->petition_message; ?></textarea>
             <?php }
                 else{ //or html editor
                     
@@ -218,30 +218,11 @@
     				</div>
     				<div class="margin-20-left dk-speakout-thanksigner dk-speakout-subsection <?php if ( $petition->thank_signer != 1 ) echo 'dk-speakout-hidden'; ?>">
     					<label for="thank_signer_content"><?php _e( 'Email content', 'speakout'); ?>:</label>
-                        <?php
-                            $initial_data = htmlspecialchars_decode(stripslashes($petition->thank_signer_content));
-                             //check to make sure there is some content, if not revert to default
-                             if( $petition->thank_signer > 0 && $petition->thank_signer_content == ""){
-                                 $initial_data  = 'Dear %firstname%,
-                                 
-                                 Thanks for signing our petition, your participation makes a difference.
-                                 
-                                 Yours sincerely,
-                                 
-                                 %petition_title%';
-                             }
-                            $settings = array(
-                                'text_area_name'=>'thank_signer_content',
-                                'tinymce' => true,
-                                'media_buttons' => false,
-                                'quicktags' => false,
-                                'editor_height' => 300
-                            );
-                            $id = 'thank_signer_content';
-                            wp_editor($initial_data, $id, $settings); 
-                        ?>
-
+    					<textarea class="preserve-textarea" style="white-space: pre-wrap;overflow-wrap: break-word;" id="thank_signer_content" name="thank_signer_content" rows="10"><?php echo trim( stripslashes( esc_attr( $petition->thank_signer_content ) ) ); ?></textarea>
                         <div class="insert_tags"><?php _e('You can personalise the message by inserting tags'); ?>: %honorific%  %first_name%  %last_name% %petition_title% <a href='https://speakoutpetitions.com/faqconc/include-user-fields-in-thank-you-email/' target='_blank'>?</a></div>
+                        <div class="markdown"><?php _e('In future I will add the ability to format the message using Markdown syntax - see'); ?> <a href="https://speakoutpetitions.com/markdown-guide/" target="_new">https://speakoutpetitions.com/markdown-guide</a></div>
+
+    					
     				</div>
     			</div>
     		</div>

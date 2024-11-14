@@ -113,27 +113,7 @@ class dk_speakout_Mail
 		        
 		// send the petition email
 		self::send( $petition->target_email, $subject, $email_message, $headers );
-		
 
-/////////////////////////////////////////////////////
-        // send the signer thankyou if enabled
-        if($petition->thank_signer > 0){
-        
-            // construct email headers
-            // To send HTML mail, the Content-type header must be set
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";   
-    		$headers .= "From: " . $from  . "\r\n";
-            $headers .= 'Reply-To: ' . 'no-reply@' . parse_url(home_url(), PHP_URL_HOST) . "\r\n" .'X-Mailer: PHP/' . phpversion() . "\r\n";
-            
-            $message = $petition->thank_signer_content ;
-    		$search  = array( '%honorific%', '%first_name%', '%last_name%', '%petition_title%');
-    		$replace = array( strip_tags($signature->honorific), strip_tags($signature->first_name), strip_tags($signature->last_name), strip_tags($petition->title) );
-    		$message = str_replace( $search, $replace, $message ); 
-    		
-    		// send the thank you email
-    		self::send( $from, "Thanks for signing our petition", $message, $headers );
-        }
 		
         if ( $options['webhooks'] == 'on' ) {
             $id = $petition->target_email;
